@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-mar-2020 10:27:12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.Cliente" table="cliente" catalog="bd_autobuses_gmt" optimistic-lock="version">
+        <id name="idCliente" type="java.lang.Integer">
+            <column name="idCliente" />
+            <generator class="identity" />
+        </id>
+        <property name="nifCliente" type="string">
+            <column name="nifCliente" length="50" not-null="true" unique="true" />
+        </property>
+        <property name="nombreCliente" type="string">
+            <column name="nombreCliente" length="100" not-null="true" />
+        </property>
+        <property name="apellidosCliente" type="string">
+            <column name="apellidosCliente" length="200" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="200" not-null="true" />
+        </property>
+        <property name="correoCliente" type="string">
+            <column name="correoCliente" length="100" not-null="true" />
+        </property>
+        <property name="telefonoCliente" type="string">
+            <column name="telefonoCliente" length="15" not-null="true" />
+        </property>
+        <property name="domicilioCliente" type="string">
+            <column name="domicilioCliente" length="200" not-null="true" />
+        </property>
+        <set name="tarjetas" table="tarjeta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCliente" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Tarjeta" />
+        </set>
+    </class>
+</hibernate-mapping>

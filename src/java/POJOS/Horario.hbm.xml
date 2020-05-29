@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-mar-2020 10:27:12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.Horario" table="horario" catalog="bd_autobuses_gmt" optimistic-lock="version">
+        <id name="idHorario" type="java.lang.Integer">
+            <column name="idHorario" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="ruta" class="POJOS.Ruta" fetch="select">
+            <column name="idRuta" not-null="true" />
+        </many-to-one>
+        <property name="horaSalida" type="time">
+            <column name="horaSalida" length="8" not-null="true" />
+        </property>
+        <property name="tipoDia" type="string">
+            <column name="tipoDia" length="7" not-null="true" />
+        </property>
+        <set name="viajes" table="viaje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idHorario" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Viaje" />
+        </set>
+        <set name="viajebackups" table="viajebackup" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idHorarioBackup" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Viajebackup" />
+        </set>
+    </class>
+</hibernate-mapping>

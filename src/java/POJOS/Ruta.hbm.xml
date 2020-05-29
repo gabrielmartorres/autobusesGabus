@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-mar-2020 10:27:12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.Ruta" table="ruta" catalog="bd_autobuses_gmt" optimistic-lock="version">
+        <id name="idRuta" type="java.lang.Integer">
+            <column name="idRuta" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="estacionByIdOrigen" class="POJOS.Estacion" fetch="select">
+            <column name="idOrigen" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estacionByIdDestino" class="POJOS.Estacion" fetch="select">
+            <column name="idDestino" not-null="true" />
+        </many-to-one>
+        <property name="duracion" type="time">
+            <column name="duracion" length="8" not-null="true" />
+        </property>
+        <property name="distancia" type="double">
+            <column name="distancia" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="precio" type="double">
+            <column name="precio" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="comentario" type="string">
+            <column name="comentario" length="50" not-null="true" />
+        </property>
+        <set name="horarios" table="horario" inverse="true" lazy="true" fetch="select" order-by="horaSalida">
+            <key>
+                <column name="idRuta" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Horario" />
+        </set>
+    </class>
+</hibernate-mapping>

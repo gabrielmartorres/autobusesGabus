@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-mar-2020 10:27:12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.Compra" table="compra" catalog="bd_autobuses_gmt" optimistic-lock="version">
+        <id name="idCompra" type="java.lang.Integer">
+            <column name="idCompra" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tarjeta" class="POJOS.Tarjeta" fetch="select" cascade="save-update">
+            <column name="idTarjetaCompra" not-null="true" />
+        </many-to-one>
+        <many-to-one name="viaje" class="POJOS.Viaje" fetch="select" cascade="save-update">
+            <column name="idViajeCompra" not-null="true" />
+        </many-to-one>
+        <property name="localizadorCompra" type="string">
+            <column name="localizadorCompra" length="50" not-null="true" />
+        </property>
+        <property name="fechaCompra" type="date">
+            <column name="fechaCompra" length="10" not-null="true" />
+        </property>
+        <property name="importeCompra" type="double">
+            <column name="importeCompra" precision="22" scale="0" not-null="true" />
+        </property>
+        <set name="ocupacions" table="ocupacion" inverse="true" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="idCompraOcupacion" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Ocupacion" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-mar-2020 10:27:12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.Autobus" table="autobus" catalog="bd_autobuses_gmt" optimistic-lock="version">
+        <id name="idAutobus" type="java.lang.Integer">
+            <column name="idAutobus" />
+            <generator class="identity" />
+        </id>
+        <property name="nombreAutobus" type="string">
+            <column name="NombreAutobus" length="50" not-null="true" />
+        </property>
+        <property name="numeroPlazasLimite" type="int">
+            <column name="NumeroPLazasLimite" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+- La base de datos es:
+bd_autobuses_gmt	sin contraseña.
+
+- Usuario y password del administrador.
+USUARIO: administrador
+PASSWORD: gabriel
+
+- Días de viaje y las rutas.
+VIAJE A: Albacete - Hellín.
+FECHA: 20-03-2020 HORARIO L-V: 08:30, 13:15.
+FECHA: 21-03-2020 HORARIO SÁBADOS: : 15:00, 20:40.
+
+VIAJE B: Hellín - Albacete.
+FECHA: 20-03-2020 HORARIO L-V: 06:30, 22:10.
+FECHA: 21-03-2020 HORARIO SÁBADOS: : 13:00, 15:10.
+
+
+- El cliente del servicio web está implementado en el puerto 8080.
+
+Aplicación de Autobuses Gabus: Autobuses.
+Aplicación del servicio de cliente web: ClienteServicioAutobuses.

@@ -1,0 +1,78 @@
+- toString en todas las clases.
+- toString2 Estacion.
+//Para mostrar los nombres de las estaciones (origen y destinos)
+    public String toString2() {
+        return "Estacion{" + "nombre=" + nombre + ", direccion=" + direccion + ", localidad=" + localidad + '}';
+    }
+
+- Constructor en Estación.
+public Estacion(Integer idEstacion, String nombre, String direccion, String localidad) {
+        this.idEstacion= idEstacion;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.localidad = localidad;
+    }
+
+- Constructor en Reservas.
+//constructor para mandar los datos seleccionados del viaje a consultar.
+    public Reserva(Date fechaViaje, Integer numeroViajeros, Ruta ObjRuta) {
+        this.fechaViaje = fechaViaje;
+        this.numeroViajeros = numeroViajeros;
+        this.ObjRuta = ObjRuta;
+    }
+
+-Constructor en ocupacion
+public Ocupacion(Viajero viajero, int asiento, double importe) {
+        this.viajero = viajero;
+        this.asiento = asiento;
+        this.importe = importe;
+    }
+
+
+
+CLASES:HBM:XML
+-COMPRA:
+<many-to-one name="tarjeta" class="POJOS.Tarjeta" fetch="select" cascade="save-update">
+<many-to-one name="viaje" class="POJOS.Viaje" fetch="select" cascade="save-update">
+<set name="ocupacions" table="ocupacion" inverse="true" lazy="true" fetch="select" cascade="all">
+
+-OCUPACION:
+<many-to-one name="viajero" class="POJOS.Viajero" fetch="select" cascade="save-update">
+
+-TARJETA:
+<many-to-one name="cliente" class="POJOS.Cliente" fetch="select" cascade="all">
+
+<property name="numeroTarjeta" type="binary">
+    <column name="numeroTarjeta" not-null="true" 
+        read="AES_DECRYPT(numeroTarjeta, 'gabriel')"
+        write="AES_ENCRYPT(?,'gabriel')"
+    />
+</property>
+
+-VIAJE:
+<set name="compras" table="compra" inverse="true" lazy="true" fetch="select" cascade="all">
+
+-RUTA:
+<set name="horarios" table="horario" inverse="true" lazy="true" fetch="select" order-by="horaSalida">
+
+-COMPRABACKUP:
+<many-to-one name="viajebackup" class="POJOS.Viajebackup" fetch="select" cascade="save-update">
+<set name="ocupacionbackups" table="ocupacionbackup" inverse="true" lazy="true" fetch="select" cascade="save-update">
+
+-OCUPACIONBACKUP:
+<many-to-one name="viajerobackup" class="POJOS.Viajerobackup" fetch="select" cascade="save-update">
+
+-VIAJEBACKUP:
+<set name="comprabackups" table="comprabackup" inverse="true" lazy="true" fetch="select" cascade="save-update">
+
+
+NUMERO TARJETA
+mastercard
+5155 7377 6496 8375
+visa
+4625 6369 6541 8658
+4451 8182 6103 6702
+
+request.setCharacterEncoding("UTF-8");
+
+
